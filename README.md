@@ -8,8 +8,8 @@ mysql , mybatis 3.3.1 , mybatis-spring 1.2.4<br>
 using @RestController No jerysy<br>
 Logback<br>
 External Tomcat 8 with https<br>
-Login URL(POST) : https://localhost:8443/BootRestSession/auth/login
-Logout URL(GET) : https://localhost:8443/BootRestSession/auth/logout
+Login URL(POST) : https://localhost:8443/BootRestSession/auth/login<br>
+Logout URL(GET) : https://localhost:8443/BootRestSession/auth/logout<br>
 Test URL(GET) : https://localhost:8443/BootRestSession/api/users
 
 # Tomcat Datasource JNDI
