@@ -32,12 +32,7 @@ public class RestLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandl
 			Authentication authentication) throws IOException, ServletException {
     	handle(request, response, authentication);
 
-        // Use the DefaultSavedRequest URL
-        // final String targetUrl = savedRequest.getRedirectUrl();
-        // logger.debug("Redirecting to DefaultSavedRequest Url: " + targetUrl);
-        // getRedirectStrategy().sendRedirect(request, response, targetUrl);
-
-		// Get Current User Info
+    	// Get Current User Info
 		String userId = authentication.getName();
 		UserVo currentUser = loginService.getUser(userId);
 
