@@ -13,15 +13,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RestLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
+
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-
-		// Remove User Info Session
 		HttpSession session = request.getSession();
 		session.invalidate();
-		
-		response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().flush();
 	}
 }

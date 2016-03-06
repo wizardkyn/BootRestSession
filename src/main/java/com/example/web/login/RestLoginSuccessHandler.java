@@ -30,20 +30,7 @@ public class RestLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandl
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-
-		final SavedRequest savedRequest = requestCache.getRequest(request, response);
-		if (savedRequest == null) {
-			clearAuthenticationAttributes(request);
-			return;
-		}
-		String targetUrlParam = getTargetUrlParameter();
-		if (isAlwaysUseDefaultTargetUrl()
-				|| (targetUrlParam != null && StringUtils.hasText(request.getParameter(targetUrlParam)))) {
-			requestCache.removeRequest(request, response);
-			clearAuthenticationAttributes(request);
-			return;
-		}
-		clearAuthenticationAttributes(request);
+    	handle(request, response, authentication);
 
         // Use the DefaultSavedRequest URL
         // final String targetUrl = savedRequest.getRedirectUrl();
@@ -64,11 +51,27 @@ public class RestLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandl
 		String jsonStr = mapper.writeValueAsString(currentUser);
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().append(jsonStr);
-		response.getWriter().flush();
-		System.out.println("HERE : LOGIN!!");
 	}
 
 	public void setRequestCache(RequestCache requestCache) {
 		this.requestCache = requestCache;
 	}
+
+	@Override
+	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+			throws IOException, ServletException {
+        final SavedRequest savedRequest = requestCache.getRequest(request, response);
+
+        if (savedRequest == null) {
+            clearAuthenticationAttributes(request);
+            return;
+        }
+        String targetUrlParam = getTargetUrlParameter();
+        if (isAlwaysUseDefaultTargetUrl() || (targetUrlParam != null && StringUtils.hasText(request.getParameter(targetUrlParam)))) {
+            requestCache.removeRequest(request, response);
+            clearAuthenticationAttributes(request);
+            return;
+        }
+        clearAuthenticationAttributes(request);
+	}	
 }
