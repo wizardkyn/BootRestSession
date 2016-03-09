@@ -1,5 +1,5 @@
 # BootRestSession
-Spring Boot Rest with Spring Security and Session Cookie(JSESSIONID) based Authentication Login through Mysql DB  
+Spring Boot Rest with Spring Security and Session Cookie(JSESSIONID) based Authentication using Mysql  
 
 # Environment
 Spring Boot 1.4.0 , Spring Security 4.0.3<br>
